@@ -1,5 +1,7 @@
 package com.emazon.transaccional_api.infraestructure.driven_repo.entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,17 +20,19 @@ public class SupplyEntity {
     @Column(name = "id_articulo")
     private Integer idArticulo;
 
-
     @Column(name = "cantidad")
     private int quantity;
+    @Column(name = "fecha")
+    private Date date;
 
     public SupplyEntity() {
     }
 
-    public SupplyEntity(int id, Integer idArticulo, int quantity) {
+    public SupplyEntity(int id, Integer idArticulo, int quantity, Date date) {
         this.id = id;
         this.idArticulo = idArticulo;
         this.quantity = quantity;
+        this.date = date;
     }
 
     public int getId() {
@@ -55,7 +59,13 @@ public class SupplyEntity {
         this.quantity = quantity;
     }
 
-   
+    public Date getDate() {
+        return date;
+    }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
     
+
 }

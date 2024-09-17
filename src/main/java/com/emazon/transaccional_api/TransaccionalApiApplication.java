@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EnableFeignClients
+@EnableFeignClients(basePackages = "com.emazon.transaccional_api.infraestructure.feign")
 public class TransaccionalApiApplication {
 
 	public static void main(String[] args) {
