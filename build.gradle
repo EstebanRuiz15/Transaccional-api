@@ -32,7 +32,15 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '4.1.2'
+	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.14'
+	implementation 'io.github.openfeign:feign-httpclient:13.2'
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.0-rc1'
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.18.0-rc1'
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.18.0-rc1'
+	implementation group: 'io.github.openfeign', name: 'feign-jackson', version: '13.3'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-oauth2-resource-server', version: '3.3.3'
+    implementation group: 'org.springframework.security', name: 'spring-security-oauth2-jose', version: '6.3.3'
 
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
@@ -49,14 +57,12 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
 	
 }
 
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2022.0.4" 
-    }
-}
+
+
 tasks.named('test') {
 	useJUnitPlatform()
 }

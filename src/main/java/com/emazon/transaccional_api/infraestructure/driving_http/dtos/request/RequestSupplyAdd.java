@@ -11,8 +11,7 @@ import lombok.Setter;
 @Setter
 public class RequestSupplyAdd {
     
-    private Integer idArticulo;
+    private Integer articuloId;
     private Integer quantity;
-
 
 }
