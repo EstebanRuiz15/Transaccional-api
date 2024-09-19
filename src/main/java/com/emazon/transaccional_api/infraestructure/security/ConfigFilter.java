@@ -27,6 +27,7 @@ public class ConfigFilter {
 
         return http
         .csrf(csrf -> csrf.disable()) 
+        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
             .anyRequest()

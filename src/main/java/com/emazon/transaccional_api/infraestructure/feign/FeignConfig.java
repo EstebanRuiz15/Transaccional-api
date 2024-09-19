@@ -9,10 +9,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.emazon.transaccional_api.domain.exceptions.ErrorFeignException;
+
 import feign.Client;
 import feign.RequestInterceptor;
+import feign.Response;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
+import feign.codec.ErrorDecoder;
 import feign.httpclient.ApacheHttpClient;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
@@ -34,6 +38,12 @@ public class FeignConfig {
                     .requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
             String jwt = request.getHeader("Authorization");
             template.header("Authorization", jwt);
+            if (jwt != null) {
+                template.header("Authorization", jwt);
+                System.out.println("JWT Token Sent: " + jwt); // Agrega un log para verificar
+            } else {
+                System.out.println("No JWT Token found in request.");
+            }
         };
     }
 
