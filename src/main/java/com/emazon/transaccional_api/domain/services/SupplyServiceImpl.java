@@ -4,30 +4,40 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.emazon.transaccional_api.domain.exceptions.ErrorFeignException;
+import com.emazon.transaccional_api.domain.interfaces.ICircuitBreakerService;
 import com.emazon.transaccional_api.domain.interfaces.IRepositotySupplyPort;
+import com.emazon.transaccional_api.domain.interfaces.IStockService;
 import com.emazon.transaccional_api.domain.interfaces.ISupplyrService;
 import com.emazon.transaccional_api.domain.model.Suply;
 import com.emazon.transaccional_api.domain.util.ConstantsDomain;
-import com.emazon.transaccional_api.infraestructure.feign.StockClient;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import com.emazon.transaccional_api.infraestructure.driving_http.util.ConstantsInfra;
+import com.mysql.cj.Constants;
+
 import feign.FeignException;
 
 @Service
 public class SupplyServiceImpl implements ISupplyrService {
 
-    private final StockClient stockClient;
+    private final IStockService stockClient;
     private final IRepositotySupplyPort repository;
+    private final ICircuitBreakerService breakService;
 
-    public SupplyServiceImpl(StockClient stockClient, IRepositotySupplyPort repository) {
+    public SupplyServiceImpl(IStockService stockClient, IRepositotySupplyPort repository,ICircuitBreakerService breakService) {
         this.stockClient = stockClient;
         this.repository = repository;
+        this.breakService=breakService;
     }
 
     @Override
-    @CircuitBreaker(name = "stockClient", fallbackMethod = "fallbackAddSuppliers")
     public String addSupliers(Suply suply) {
-        stockClient.incrementQuantity(suply.getArticuloId(), suply.getQuantity());
-        return repository.save(suply);
+        return breakService.executeWithCircuitBreaker(
+           ConstantsDomain.STOCK_CLIENT , 
+            () -> {
+                stockClient.incrementQuantity(suply.getArticuloId(), suply.getQuantity());
+                return repository.save(suply);
+            }, 
+            throwable -> fallbackAddSuppliers(suply, throwable)
+        );
     }
 
     public String fallbackAddSuppliers(Suply suply, Throwable throwable) {
