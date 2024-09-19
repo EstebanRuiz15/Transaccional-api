@@ -9,11 +9,8 @@ import com.emazon.transaccional_api.domain.interfaces.ISupplyrService;
 import com.emazon.transaccional_api.domain.model.Suply;
 import com.emazon.transaccional_api.domain.util.ConstantsDomain;
 import com.emazon.transaccional_api.infraestructure.feign.StockClient;
-import feign.RetryableException;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-import feign.Feign;
 import feign.FeignException;
-import feign.Response;
 
 @Service
 public class SupplyServiceImpl implements ISupplyrService {

@@ -16,7 +16,6 @@ import com.emazon.transaccional_api.infraestructure.driving_http.util.ConstantsI
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController

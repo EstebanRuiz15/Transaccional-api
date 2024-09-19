@@ -8,15 +8,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import com.emazon.transaccional_api.domain.exceptions.ErrorFeignException;
-
 import feign.Client;
 import feign.RequestInterceptor;
-import feign.Response;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
-import feign.codec.ErrorDecoder;
 import feign.httpclient.ApacheHttpClient;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
