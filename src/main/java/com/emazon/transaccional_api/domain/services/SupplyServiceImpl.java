@@ -46,6 +46,6 @@ public class SupplyServiceImpl implements ISupplyrService {
                 throw new ErrorFeignException( ConstantsDomain.ERROR_NOT_HANDLER+ feignException.getMessage());
             }
         }
-        return "Error desconocido.";
+        return ConstantsDomain.ERROR_NOT_HANDLER;
     }
 }

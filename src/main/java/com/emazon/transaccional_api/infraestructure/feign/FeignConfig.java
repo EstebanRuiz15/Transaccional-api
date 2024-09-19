@@ -33,12 +33,6 @@ public class FeignConfig {
                     .requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
             String jwt = request.getHeader("Authorization");
             template.header("Authorization", jwt);
-            if (jwt != null) {
-                template.header("Authorization", jwt);
-                System.out.println("JWT Token Sent: " + jwt); // Agrega un log para verificar
-            } else {
-                System.out.println("No JWT Token found in request.");
-            }
         };
     }
 

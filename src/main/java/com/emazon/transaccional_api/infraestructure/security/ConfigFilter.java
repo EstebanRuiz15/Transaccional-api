@@ -9,6 +9,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.emazon.transaccional_api.infraestructure.driving_http.util.ConstantsInfra;
 import com.emazon.transaccional_api.infraestructure.security.jwt_configuration.JwtAutenticationFilter;
 
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class ConfigFilter {
         .csrf(csrf -> csrf.disable()) 
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+            .requestMatchers(ConstantsInfra.URL_SWAGGER1,ConstantsInfra.URL_SWAGGER2,ConstantsInfra.URL_SWAGGER3 ).permitAll()
             .anyRequest()
             .authenticated()    
              
