@@ -10,12 +10,11 @@ import com.emazon.transaccional_api.domain.interfaces.IStockService;
 import com.emazon.transaccional_api.domain.interfaces.ISupplyrService;
 import com.emazon.transaccional_api.domain.model.Suply;
 import com.emazon.transaccional_api.domain.util.ConstantsDomain;
-import com.emazon.transaccional_api.infraestructure.driving_http.util.ConstantsInfra;
-import com.mysql.cj.Constants;
-
 import feign.FeignException;
+import feign.RetryableException;
 
 @Service
+
 public class SupplyServiceImpl implements ISupplyrService {
 
     private final IStockService stockClient;
@@ -41,7 +40,9 @@ public class SupplyServiceImpl implements ISupplyrService {
     }
 
     public String fallbackAddSuppliers(Suply suply, Throwable throwable) {
-
+        if (throwable instanceof RetryableException) {
+            throw new ErrorFeignException(ConstantsDomain.MICRO_NO_AVAILABLE);
+        }
         if (throwable instanceof FeignException) {
             FeignException feignException = (FeignException) throwable;
             int status = feignException.status();
