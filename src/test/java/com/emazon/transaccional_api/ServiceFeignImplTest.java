@@ -19,7 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.emazon.transaccional_api.domain.exceptions.ErrorExceptionArticleNotFound;
 import com.emazon.transaccional_api.domain.exceptions.ErrorFeignException;
 import com.emazon.transaccional_api.domain.util.ConstantsDomain;
-import com.emazon.transaccional_api.infraestructure.driven_repo.adapters.ServiceFeignImple;
+import com.emazon.transaccional_api.infraestructure.driven_repo.adapters.ServiceFeignStockImpl;
 import com.emazon.transaccional_api.infraestructure.feign.StockClient;
 
 import feign.FeignException;
@@ -32,12 +32,12 @@ public class ServiceFeignImplTest {
     private StockClient stockClient;
 
     @InjectMocks
-    private ServiceFeignImple serviceFeignImple;
+    private ServiceFeignStockImpl serviceFeignImple;
 
     @BeforeEach
     void setUp() {
         stockClient=mock(StockClient.class);
-        serviceFeignImple= new ServiceFeignImple(stockClient);
+        serviceFeignImple= new ServiceFeignStockImpl(stockClient);
     }
 
     @Test

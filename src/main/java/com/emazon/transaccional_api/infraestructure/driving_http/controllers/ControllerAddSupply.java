@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.emazon.transaccional_api.domain.interfaces.ISupplyrService;
 import com.emazon.transaccional_api.infraestructure.driving_http.dtos.request.RequestSupplyAdd;
 import com.emazon.transaccional_api.infraestructure.driving_http.mappers.MapperSupply;
-import com.emazon.transaccional_api.infraestructure.driving_http.util.ConstantsInfra;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -43,4 +42,5 @@ public class ControllerAddSupply {
     public ResponseEntity<String> addSupply(@RequestBody RequestSupplyAdd request) {
         return ResponseEntity.ok(supplyrService.addSupliers(mapper.toSuply(request)));
     }
+
 }
