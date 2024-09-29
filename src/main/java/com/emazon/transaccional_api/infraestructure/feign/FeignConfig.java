@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import feign.Client;
+import feign.Request;
 import feign.RequestInterceptor;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
@@ -35,6 +36,11 @@ public class FeignConfig {
             template.header("Authorization", jwt);
         };
     }
+
+    @Bean
+    public Request.Options feignOptions() {
+    return new Request.Options(5000, 30000);  
+}
 
     @Bean
     public Encoder feignEncoder() {

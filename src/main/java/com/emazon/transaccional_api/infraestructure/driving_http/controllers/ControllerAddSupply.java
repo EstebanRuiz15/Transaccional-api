@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.emazon.transaccional_api.domain.interfaces.ISupplyrService;
 import com.emazon.transaccional_api.infraestructure.driving_http.dtos.request.RequestSupplyAdd;
 import com.emazon.transaccional_api.infraestructure.driving_http.mappers.MapperSupply;
-import com.emazon.transaccional_api.infraestructure.driving_http.util.ConstantsInfra;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -27,7 +26,8 @@ public class ControllerAddSupply {
     private final ISupplyrService supplyrService;
     private final MapperSupply mapper;
 
-    @Operation(summary = "Method for add supply articles", description = " This method is to supply items, it can only access the auxiliary warehouse role, this method communicates with the stock microservice..\n\n" + //
+    @Operation(summary = "Method for add supply articles", description = " This method is to supply items, it can only access the auxiliary warehouse role, this method communicates with the stock microservice..\n\n"
+            + //
             "rules:\n\n" + //
             "       - new supplies have to increase the amount of existing supplies\n\n" + //
             "       - If any error occurs, you must review the changes made, so that it does not affect the supply data.")
@@ -40,7 +40,7 @@ public class ControllerAddSupply {
     @PreAuthorize("hasRole('AUX_BODEGA')")
     @PostMapping("/")
     public ResponseEntity<String> addSupply(@RequestBody RequestSupplyAdd request) {
-        supplyrService.addSupliers(mapper.toSuply(request));
-        return ResponseEntity.ok(ConstantsInfra.GOOD_RESPONSE_ARTICLE_MESSAGE);
+        return ResponseEntity.ok(supplyrService.addSupliers(mapper.toSuply(request)));
     }
+
 }

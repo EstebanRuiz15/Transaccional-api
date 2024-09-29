@@ -18,8 +18,7 @@ public class SupplyEntity {
     private int id;
 
     @Column(name = "id_articulo")
-    private Integer idArticulo;
-
+    private Integer articuloId;
     @Column(name = "cantidad")
     private int quantity;
     @Column(name = "fecha")
@@ -28,9 +27,9 @@ public class SupplyEntity {
     public SupplyEntity() {
     }
 
-    public SupplyEntity(int id, Integer idArticulo, int quantity, Date date) {
+    public SupplyEntity(int id, Integer articuloId, int quantity, Date date) {
         this.id = id;
-        this.idArticulo = idArticulo;
+        this.articuloId = articuloId;
         this.quantity = quantity;
         this.date = date;
     }
@@ -43,12 +42,12 @@ public class SupplyEntity {
         this.id = id;
     }
 
-    public Integer getIdArticulo() {
-        return idArticulo;
+    public Integer getArticuloId() {
+        return articuloId;
     }
 
-    public void setIdArticulo(Integer idArticulo) {
-        this.idArticulo = idArticulo;
+    public void setArticuloId(Integer articuloId) {
+        this.articuloId = articuloId;
     }
 
     public int getQuantity() {
